@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  display: block;
+  max-width: 285px;
+  margin: 20px auto;
+}
+
+h1 {
+  text-align: center;
+}
