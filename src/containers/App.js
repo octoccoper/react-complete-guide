@@ -18,7 +18,8 @@ class App extends Component {
       { id:'unic-id3', name: 'Cappucin', age: 100 },
       { id:'unic-id4', name: 'Cappucino', age: 1001 }
   ],
-    showPerson: false
+    showPerson: false,
+    showCockpit: true
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -63,6 +64,12 @@ class App extends Component {
 
   }
 
+  toggleCockpit = () => {
+    const showingCockpit = this.state.showCockpit;
+    
+    this.setState({showCockpit: !showingCockpit});
+  }
+
   removePersonHandler = (personIndex) => {
 
       const persons = [...this.state.persons];
@@ -94,9 +101,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Cockpit 
-            headline={"Managing personal"}
-            clicked={this.showPersonList} />
+        <button onClick={this.toggleCockpit}>Toggle Cockpit</button>
+        { this.state.showCockpit ?
+                <Cockpit 
+                headline={"Managing personal"}
+                clicked={this.showPersonList}
+                persons={this.state.persons} />
+            : null
+      }
         {personsList}
       </div>
     );
