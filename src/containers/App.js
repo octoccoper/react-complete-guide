@@ -7,8 +7,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   constructor(props) {
-    super(props);
     console.log('[App.js] constructor worked');
+    super(props);
   }
 
   state = {
@@ -18,7 +18,25 @@ class App extends Component {
       { id:'unic-id3', name: 'Cappucin', age: 100 },
       { id:'unic-id4', name: 'Cappucino', age: 1001 }
   ],
-  showPerson: false
+    showPerson: false
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[App.js] getSnapshotBeforeUpdate');
+    return { message: 'App'};
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+      console.log('[App.js] componentDidUpdate, snapshot:',snapshot);
+  }
+
+  componentDidMount () {
+    console.log('[App.js] componentDidMount');
   }
 
   changeNameHandler = (event, personId) => {
@@ -58,6 +76,8 @@ class App extends Component {
   render = () => {
 
     let personsList = null;
+
+    console.log('[App.js] render');
 
     if(this.state.showPerson) {
       personsList = (
